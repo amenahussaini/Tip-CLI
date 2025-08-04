@@ -3,33 +3,37 @@
 class MealOrder
     attr_accessor :dish_name
     attr_accessor :dish_price
+
+    def initialize(dish_name, dish_price)
+        @dish_name = dish_name
+        @dish_price = dish_price
+    end
 end
 
-TIP_PERCENTAGE = 10
+    what_total = 0
+    TIP_PERCENTAGE = 10
 
-my_order = MealOrder.new
-my_order.dish_name = "Chicken Parm"
-my_order.dish_price = 23.95
+receipt = []
 
-your_order = MealOrder.new
-your_order.dish_name = "Cheese Pizza"
-your_order.dish_price = 19.12
+3.times do
+    print "Enter dish name:"
+    name = gets.chomp
 
-def add_total(a, b)
-    a + b
+    print "Enter price of dish:"
+    number = gets.chomp.to_f
+
+    receipt << MealOrder.new(name, number)
 end
 
-def total_tip(a,b)
-    #total amount with tip included - 
-    tip_amount = b.to_f / 100
-    return (tip_amount.to_f + b.to_f)
+puts "Final Bill:"
+
+receipt.each do |meal|
+    #total_to_integer = contact[:number].to_i
+    puts "#{meal.dish_name} - $#{meal.dish_price.round(2)}"
+    what_total += meal.dish_price
 end
 
-pp my_order.dish_name
-pp my_order.dish_price
-
-pp your_order.dish_name
-pp your_order.dish_price
-
-pp "Total Amount: #{add_total(my_order.dish_price, your_order.dish_price)}"
-pp "Total Tip: #{total_tip(200, TIP_PERCENTAGE)}"
+puts "Total without tip: $#{what_total.round(2)}"
+tip_amount = what_total * TIP_PERCENTAGE / 100.0
+puts "Tip (#{TIP_PERCENTAGE}%): $#{tip_amount.round(2)}"
+puts "Total with tip: $#{(what_total + tip_amount).round(2)}"
