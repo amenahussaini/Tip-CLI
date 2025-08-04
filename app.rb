@@ -10,30 +10,48 @@ class MealOrder
     end
 end
 
-    what_total = 0
-    TIP_PERCENTAGE = 10
-
 receipt = []
+order_total = 0
 
-3.times do
-    print "Enter dish name:"
-    name = gets.chomp
+print "\nHow many items including drinks did you order?"
+number_of_dishes = gets.chomp.to_i
 
-    print "Enter price of dish:"
+if number_of_dishes <= 0
+    puts "Please enter a valid number of dishes."
+    exit
+end
+
+puts "\nThank you for eating with us. 
+\nPlease enter the dish(es) you ordered. 
+\nExample: 'Chicken Taco'."
+
+number_of_dishes.times do |i|
+    print "\n#{i + 1}. Enter Dish Name:"
+    name = gets.chomp.capitalize
+
+    print "#{i + 1}. Price of #{name} Dish (Numbers Only):"
     number = gets.chomp.to_f
 
     receipt << MealOrder.new(name, number)
 end
 
-puts "Final Bill:"
+print "\nHow much tip in percentage(%) would you like to add?"
+percentage_amount = gets.chomp.to_f
+
+TIP_PERCENTAGE = percentage_amount
+
+if TIP_PERCENTAGE < 0
+    puts "\nTip can not be negative."
+    exit
+end
+puts "\n\nFINAL BILL:"
 
 receipt.each do |meal|
-    #total_to_integer = contact[:number].to_i
     puts "#{meal.dish_name} - $#{meal.dish_price.round(2)}"
-    what_total += meal.dish_price
+    order_total += meal.dish_price
 end
 
-puts "Total without tip: $#{what_total.round(2)}"
-tip_amount = what_total * TIP_PERCENTAGE / 100.0
+puts "\nTotal Without Tip: $#{order_total.round(2)}"
+tip_amount = order_total * TIP_PERCENTAGE / 100.0
 puts "Tip (#{TIP_PERCENTAGE}%): $#{tip_amount.round(2)}"
-puts "Total with tip: $#{(what_total + tip_amount).round(2)}"
+puts "Total With Tip: $#{(order_total + tip_amount).round(2)}"
