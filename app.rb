@@ -23,14 +23,13 @@ if number_of_dishes <= 0
 end
 
 puts "\nThank you for eating with us. 
-\nPlease enter the dish(es) you ordered. 
-\nExample: 'Chicken Taco'."
+\nPlease enter the dish(es) you ordered."
 
 number_of_dishes.times do |i|
-    print "\n#{i + 1}. Enter Dish Name:"
+    print "\n#{i + 1}. Enter dish name:"
     name = gets.chomp.capitalize
 
-    print "#{i + 1}. Price of #{name} Dish (Numbers Only):"
+    print "#{i + 1}. Price of #{name} dish:"
     number = gets.chomp.to_f
 
     receipt << MealOrder.new(name, number)
@@ -52,7 +51,7 @@ receipt.each do |meal|
     order_total += meal.dish_price
 end
 
-puts "\nTotal Without Tip: $#{order_total.round(2)}"
+puts "\nTotal without Tip: $#{order_total.round(2)}"
 tip_amount = order_total * TIP_PERCENTAGE / 100.0
 puts "Tip (#{TIP_PERCENTAGE}%): $#{tip_amount.round(2)}"
-puts "Total With Tip: $#{(order_total + tip_amount).round(2)}"
+puts "Total with Tip: $#{(order_total + tip_amount).round(2)}"
