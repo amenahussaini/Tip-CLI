@@ -13,6 +13,7 @@ end
 receipt = []
 order_total = 0
 
+
 print "\nHow many items including drinks did you order?"
 number_of_dishes = gets.chomp.to_i
 
